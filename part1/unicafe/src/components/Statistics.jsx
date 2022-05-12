@@ -2,7 +2,8 @@ import React from "react";
 import { Statistic } from "./Statistic";
 
 export const Statistics = ({ good, bad, neutral }) => {
-    if (good === 0 || neutral == 0 || bad === 0) {
+    let total = good + bad + neutral;
+    if (total === 0) {
         return (
             <>
                 <p>No feedback given</p>
@@ -10,7 +11,8 @@ export const Statistics = ({ good, bad, neutral }) => {
         );
     }
 
-    let total = good + bad + neutral;
+    let promedi = (good - bad) / total;
+    let positive = (good / total) * 100 + " %"
     return (
         <>
             <table>
@@ -32,6 +34,16 @@ export const Statistics = ({ good, bad, neutral }) => {
                 <tr>
                     <td>
                         <Statistic text="All" value={total} />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <Statistic text="Average" value={promedi} />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <Statistic text="Positive" value={positive} />
                     </td>
                 </tr>
             </table>

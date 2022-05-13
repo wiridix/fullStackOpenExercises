@@ -3,8 +3,10 @@ import ReactDOM from "react-dom/client";
 
 const Button = ({ handle, text }) => <button onClick={handle}>{text}</button>;
 const Title = ({ title }) => <h2>{title}</h2>;
+const Anecdote = ({ anecdote }) => <p>{anecdote}</p>;
+const Votes = ({ votes }) => <p>has vote: {votes}</p>;
 
-const App = (props) => {
+const App = ({ anecdotes }) => {
     const [selected, setSelected] = useState(0);
     const [votes, setvotes] = useState(new Array(anecdotes.length).fill(0));
 
@@ -19,19 +21,18 @@ const App = (props) => {
         setvotes(copy);
     };
 
-    let anecdoteMaxVotes = votes.indexOf(Math.max(...votes))
+    let anecdoteMaxVotes = votes.indexOf(Math.max(...votes));
 
     return (
         <>
             <Title title="Anecdote of the day" />
-            <p>{props.anecdotes[selected]}</p>
+            <Anecdote anecdote={anecdotes[selected]} />
             <Button handle={handleVote} text="Vote" />
             <Button handle={handleNext} text="Next Anecdote" />
-            <p>has vote: {votes[selected]}</p>
+            <Votes votes={votes[selected]} />
             <Title title="Anecdote with most votes" />
-            <p>{props.anecdotes[anecdoteMaxVotes]}</p>
-            <p>has vote: {votes[anecdoteMaxVotes]}</p>
-
+            <Anecdote anecdote={anecdotes[anecdoteMaxVotes]} />
+            <Votes votes={votes[anecdoteMaxVotes]} />
         </>
     );
 };

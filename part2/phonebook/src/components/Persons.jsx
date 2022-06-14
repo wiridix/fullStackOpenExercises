@@ -1,12 +1,11 @@
 import React from "react";
+import { Person } from "./Person";
 
-export const Persons = ({ persons }) => {
+export const Persons = ({ persons, handledelete }) => {
     return (
         <ul>
-            {persons.map((person, i) => (
-                <li key={i}>
-                    {person.name} {person.number}
-                </li>
+            {persons.map(({name,number,id}) => (
+                <Person name={name} number={number} id={id} key={id} handledelete={handledelete} />
             ))}
         </ul>
     );
